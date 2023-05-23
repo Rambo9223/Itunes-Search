@@ -1,55 +1,69 @@
-Plan 
+1. Itunes API app
 
-Page front-end
+2. Within the GIT repo is a basic app created with create-react-app and express.
 
-A form containing:
-- A search bar attached to a useState value, where the user can type in the criteria
-- check box inputs that allow user to select type of content(movie,podcast,music,audiobook,short film, TV Show,software, eBook or All) if all is selected all other checkboxes are unchecked
-- search button on click fetches from the API 
-- section for the content to be returned to the user, with button rendered on to it giving user option to add to list, (onclick should add item to the favourites list)
+The App allows the user to search the epansive data available in the Apple Itunes API and add any of the
+items they search to a personal favourites page, they can add as many search items as they like and serach 
+for as many items as they like, they can also delete any items from their list.
 
-To keep 
-Keep list but is going to change  favourites user adds
+Challeneges I had with creating this app included filtering through the returned object for common data that
+could be used accross all functions ie the add and delete, (some items ie. books/movies have different
+named data in the objects that changed how they would be presented).
 
-add function(POST)
+In the future I'd like to change the project, for this build I had to implement a function that deletes the 
+data if the user refreshes or navigates away from the page, however in future it might be better to have a user
+login that would allow the app to retain the specific data based on the user.
 
-delete function(DELETE) 
+3. How to Install
 
-could use routes to have list on a separate page
+Download the zipped file from GitHub and unzip in to your chosen directory.
 
-To remove
+Open the terminal or VSCode and navigate to the directory that contains the files using cd
 
-We don't require an edit function so can remove the edit functions from GetData, Edit(components) and the PUT functions from the backend
+![terminal](Images/Screenshot%20(39).png)
 
-Page Backend - 
+Type npm start , then enter, the required packages should install and once compiled you will be able to use the app on your browser at localhost:3000
 
-helmet added to node, no idea wtf it does, just another add in from hyperion with no explanation whatsoever 
+![Succrssful Compile](Images/Screenshot%20(40).png)
 
-Keep 
+4. How to access
 
-GET X 2 = retrieve data from searches & retrieve the list of favourites
-POST = option to add new item to favourites list 
-DELETE = remove item from favourites list 
+If you are unable to install you can access the app online at Netlify using the following link
+- 
+![Netlify](get image)
 
-Remove 
+5. How to use
+Once the App is opened you should have a screen that resembles the below. 
 
-old paths and functions 
-will need one local path to json file 
-and another to the itunes API
+![Opening Screen](Images/Screenshot%20(41).png)
+
+Click the search link to open the search form, from there you can type in the 
+item name you wish to search for. If you want to narrow down the results you 
+can also select the type of media you wish to search. 
+
+![Search example](Images/Screenshot%20(44).png)
+
+Click the search button and the results will return below the form. 
+
+![results](Images/Screenshot%20(42).png)
+
+You can add any of the results to your favourites list by clicking the 
+Add to favourites button. 
+
+To view your favourites list click the My Favourites link. 
+Any item you have added to favourites from any searches will be in the list. 
+You can follow the link to the Apple store to by the items or if you no 
+longer wish to have an item in your list you can remove it clicking the
+delete button. 
+
+![Favourites](Images/Screenshot%20(43).png)
+
+Note! Any time you navigate away from the page or refresh the items in your favourites 
+will not be saved. 
+
+The App has been secured with helmet with the default levels of protection applied.
+Check by Security Headers
+
+![Security Check](Images/Screenshot%20(45).png)
 
 
-task to do
-
-1. Done 
-2. Done 
-3. change css properties of page to look nice  - Done
-4. Done
-5. Done
-6. to do (Snapshot test for front and back end)
-7. Done, imported automatically applies security features
-8. Done
-9. Done
-10. Will be done
-11. Will be done once 1-10 are complete 
-12. Will push to Git 
-13. Will depoly to nelify, (look for email from Kuvashnee)

@@ -66,6 +66,7 @@ retrieves the list as json file */
   const fetchData = async(link) => {
     const response = await fetch(link);
     if (!response.ok) {
+      alert("Unable to find requested item");
       throw new Error("Data coud not be fetched!");
     } else {
       return response.json();

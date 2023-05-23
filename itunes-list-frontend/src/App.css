@@ -1,0 +1,93 @@
+.App {
+  text-align: center;
+  background: rgb(34,193,195);
+  background: linear-gradient(0deg, rgb(16, 145, 147) 0%, rgb(124, 34, 198) 100%);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-header {
+  width:40%;
+}
+
+.App-body{
+  width: 80%;
+}
+
+.title{
+  color: black;
+}
+
+.add-container{
+  padding: 20px 0px;
+  position: relative;
+  top: 20px;
+}
+
+#showlist{
+  position: relative;
+  top: 30px;
+}
+
+input[type=text], textarea {
+  width: 100%; /* Full width */
+  padding: 12px; /* Some padding */ 
+  border: 1px solid #ccc; /* Gray border */
+  border-radius: 4px; /* Rounded borders */
+  box-sizing: border-box; /* Make sure that padding and width stays in place */
+  margin-top: 6px; /* Add a top margin */
+  margin-bottom: 16px; /* Bottom margin */
+  resize: vertical /* Allow the user to vertically resize the textarea (not horizontally) */
+}
+
+.new-item-form{
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+  color: black;
+}
+
+.check-group{
+  display: inline-flex;
+  flex-direction: column;
+  align-items:flex-start;
+  justify-content: space-between;
+  padding: 0 20px 0 0 ;
+}
+.check-container{
+  position: relative;
+  left: 25px;
+}
+.check-all{
+  position: relative;
+  bottom: 20px;
+}
+.favourite-container , .result-container{
+  font-size: medium;
+}
+
+.nav-list{
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  text-decoration: none;
+}
+
+.nav-list>li{
+  padding: 0 30px;
+  color:inherit;
+  text-decoration: none;
+}
+
+.nav-list>li:hover{
+  color: rgb(65, 53, 242);
+  text-decoration: underline;
+  font-size: 28px;
+}
+

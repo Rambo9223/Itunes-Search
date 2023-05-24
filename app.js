@@ -4,12 +4,19 @@ const express = require('express');
 const helmet = require("helmet");
 const fs = require('fs');
 const app = express();
+const path = require("path")
 const port = process.env.PORT || 5000 // use port 3000
 const favouritesList = require("./Favourites-List.json"); // import our json file
 const bodyParser = require('body-parser');//
 app.use(bodyParser.urlencoded({ extended:true }));
 app.use(bodyParser.json());
 app.use(helmet());
+
+app.use(express.static(path.join(__dirname, 'build')));
+
+app.get('/', function (req, res) {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
 
 // the base get function returns the current favourites list
 app.get('/api', (req, resp)=>{

@@ -19,7 +19,7 @@
   },
   "scripts": {
     "start": "npm install && react-scripts start && concurrently",
-    "build": "react-scripts build && cd .. && npm run backend",
+    "build": "react-scripts build",
     "test": "react-scripts test --watchAll --coverage",
     "eject": "react-scripts eject"
   },

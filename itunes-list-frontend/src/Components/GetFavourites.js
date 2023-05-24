@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import DeleteProject from './DeleteProject';
-import * as Icon from "react-bootstrap-icons"
+import * as Icon from "react-bootstrap-icons";
 
 
 /* The GetFavourites function is the main function used to 

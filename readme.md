@@ -33,6 +33,7 @@ If you are unable to install you can access the app online at Netlify using the 
 ![Netlify](get image)
 
 5. How to use
+
 Once the App is opened you should have a screen that resembles the below. 
 
 ![Opening Screen](Images/Screenshot%20(41).png)

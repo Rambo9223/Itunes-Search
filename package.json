@@ -7,7 +7,7 @@
     "test": "jest",
     "test:watch":"jest --watch",
     "frontend": "cd itunes-list-frontend && npm start",
-    "frontend-build":"cd itunes-list-frontend && npm build",
+    "frontend-build":"cd itunes-list-frontend && npm run build",
     "backend": "npm install && nodemon app.js && concurrently ",
     "start": "concurrently \"npm run backend\" \"npm run frontend\"",
     "build": "concurrently \"npm run backend\" \"npm run frontend-build\""

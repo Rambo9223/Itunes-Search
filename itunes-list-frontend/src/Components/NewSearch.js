@@ -42,6 +42,7 @@ function HandleSearch(){
         }
     }
     // setPath to usestate path 
+    console.log(newPath);
     setPath(newPath);
 }
 // if user has selected select all radio

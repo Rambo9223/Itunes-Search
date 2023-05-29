@@ -5,6 +5,15 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import GetFavourites from './Components/GetFavourites';
 import NewSearch from './Components/NewSearch';
 import { Route,Routes,Link } from "react-router-dom";
+/* Marker Please note!!
+as of today 29.05.23 the link in the course material 
+https://performance-partners.apple.com/resources/documentation/itunes-store
+returns a page with no content, if a student hadn't made their app yet 
+there would be no instructions with how to set up search criteria to use the 
+API.
+
+Also not as per email with mentor I have not deployed this app.*/
+
 /* Add a nav bar, that contains links to the pages 
 for search and favourites, look in to how helmut works etc
  */

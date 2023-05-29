@@ -29,8 +29,7 @@ Type npm start , then enter, the required packages should install and once compi
 4. How to access
 
 If you are unable to install you can access the app online at Netlify using the following link
-- 
-![Netlify](get image)
+- https://646dd6358442827cafbb68e1--resplendent-kelpie-03ccf5.netlify.app/
 
 5. How to use
 

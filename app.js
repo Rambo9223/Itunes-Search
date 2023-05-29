@@ -5,7 +5,7 @@ const helmet = require("helmet");
 const fs = require('fs');
 const app = express();
 const path = require("path")
-const port = process.env.PORT || 5000 // use port 3000
+const port = process.env.PORT || 5000 // use port 5000
 const favouritesList = require("./Favourites-List.json"); // import our json file
 const bodyParser = require('body-parser');//
 app.use(bodyParser.urlencoded({ extended:true }));
@@ -18,6 +18,9 @@ app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
+app.get('/api/welcome', (req,resp)=>{
+    resp.status(200).send({message:"Welcome to the server!"});
+})
 // the base get function returns the current favourites list
 app.get('/api', (req, resp)=>{
     resp.send(favouritesList)
@@ -66,7 +69,7 @@ app.post('/list/', (req, resp)=>{
     })}else{// if list has no items this will add first entry
         favouritesList.push(addItem)
         fs.writeFileSync('./Favourites-List.json', JSON.stringify(favouritesList))
-        resp.jsonp(favouritesList); 
+        resp.status(200).send(favouritesList); 
         console.log(favouritesList);
     }
 });
@@ -91,3 +94,5 @@ app.delete(`/list/`, (req, resp) => {
 })
 // a listen message to show user the server is running
 app.listen(port, ()=>console.log(`Listening on Port-${port}`))
+
+module.exports = app;// required for testing purposes

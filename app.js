@@ -1,5 +1,6 @@
 // import express
 const express = require('express');
+//const router = express.Router();
 // import fs to update the Web-Project json file 
 const helmet = require("helmet");
 const fs = require('fs');
@@ -11,6 +12,7 @@ const bodyParser = require('body-parser');//
 app.use(bodyParser.urlencoded({ extended:true }));
 app.use(bodyParser.json());
 app.use(helmet());
+const fetch = (...args) => import("node-fetch").then(({default:fetch})=>fetch(...args));
 
 app.use(express.static(path.join(__dirname, 'build')));
 
@@ -24,6 +26,27 @@ app.get('/api/welcome', (req,resp)=>{
 // the base get function returns the current favourites list
 app.get('/api', (req, resp)=>{
     resp.send(favouritesList)
+})
+
+/* This is the async function to retrieve the search results from the api, 
+Question? From the previous submission I had a function 
+in the frontend that would fetch data from the api, 
+in the resubmission as requested I have two async functions, one from the frontend to 
+pass the link for the backend function to search the API. Why would this 
+way be the preferred way to structure the code?   */
+app.get("/search/",async function(req, resp){
+    let link = String(JSON.stringify(req.query));
+    let editLink = link.trim().replace(/,/g,'&').replace(/"/g,'').replace(/ /g,"+").replace(/:/g,"=").replace(/{/,'').replace(/}/,'').replace(/=/,":");
+    
+    try {
+        let response = await fetch(editLink);
+        let result = await response.json();
+        resp.status(200).json(result);
+    }catch(err){
+        console.log(err);
+        resp.status(500).json({message:"Internal Server Error."})
+    }
+    
 })
 
 /*This function will delete the information on the app when the user
@@ -76,11 +99,12 @@ app.post('/list/', (req, resp)=>{
 
 // delete person
 app.delete(`/list/`, (req, resp) => {
-    const id = Number(req.query.trackId);//id of item to delete
+    console.log(req.query.Id);
+    let id = Number(req.query.Id);//id of item to delete
     let i = 0;// counting variable = index value of item to delete
     favouritesList.forEach((item)=>{
         //if item id = id
-        if(item.trackId === id){
+        if(item.Id === id || item.trackId === id){// trackId is only here for testing
             favouritesList.splice(i, 1)
             fs.writeFileSync('./Favourites-List.json', JSON.stringify(favouritesList))
             resp.send(favouritesList)// log success
@@ -96,3 +120,4 @@ app.delete(`/list/`, (req, resp) => {
 app.listen(port, ()=>console.log(`Listening on Port-${port}`))
 
 module.exports = app;// required for testing purposes
+//module.exports = router;

@@ -59,7 +59,7 @@ describe("test Backend API", () => {
       it("test delete route", (done) => {
         chai
           .request(server)
-          .delete(`/list/?trackId=${item.trackId}`)
+          .delete(`/list/?Id=${item.trackId}`)
           .end((err, resp) => {
             console.log(`${resp.body.length} items in favourites list`);
             assert.equal(resp.body.length, 0, "Item not removed");

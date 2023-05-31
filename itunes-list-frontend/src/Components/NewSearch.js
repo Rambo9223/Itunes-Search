@@ -63,15 +63,19 @@ function HandleSelect(){
 }
 
   /* fetchData is async function that 
-retrieves the list as json file */
+send the link to the backend and returns
+the list as json file */
+  
   const fetchData = async(link) => {
-    const response = await fetch(link);
+    const response = await fetch(`/search/?${link}`);
     if (!response.ok) {
       throw new Error("Data coud not be fetched!");
     } else {
       return response.json();
     }
   };
+
+
   /* after the json file is retrieved this
 useEffect code runs taking file and making the 
 item variable = the response */
@@ -108,29 +112,29 @@ item variable = the response */
         <div className="check-container">
         <div className="check-group">
         <label for="movie">
-        <input type="checkbox" className="media" id="movie" name="movie" value="movie"/>Movie</label>
+        <input type="radio" className="media" id="movie" name="single" value="movie"/>Movie</label>
         <label for="tvShow">
-        <input type="checkbox" className="media" id="tv" name="tvShow" value="tvShow"/>Tv Show</label>
+        <input type="radio" className="media" id="tv" name="single" value="tvShow"/>Tv Show</label>
         <label for="podcast">
-        <input type="checkbox" className="media" id="podcast" name="podcast" value="podcast"/>Podcast</label>
+        <input type="radio" className="media" id="podcast" name="single" value="podcast"/>Podcast</label>
         <br />
         </div>
         <div className="check-group">
         <label for="music">
-        <input type="checkbox" className="media" id="music" name="music" value="music"/>Music</label>
+        <input type="radio" className="media" id="music" name="single" value="music"/>Music</label>
         <label for="mv">
-        <input type="checkbox" className="media" id="mv" name="mv" value="musicVideo"/>Music Video</label>
+        <input type="radio" className="media" id="mv" name="single" value="musicVideo"/>Music Video</label>
         <label for="shortFilm">
-        <input type="checkbox" className="media" id="sfilm" name="sfilm" value="shortFilm"/>Short Film</label>
+        <input type="radio" className="media" id="sfilm" name="single" value="shortFilm"/>Short Film</label>
         <br />
         </div>
         <div className="check-group">
         <label for="abook">
-        <input type="checkbox" className="media" id="abook" name="abook" value="audiobook"/>Audio Book</label>
+        <input type="radio" className="media" id="abook" name="single" value="audiobook"/>Audio Book</label>
         <label for="ebook">
-        <input type="checkbox" className="media" id="ebook" name="ebook" value="ebook"/>ebook</label>
+        <input type="radio" className="media" id="ebook" name="single" value="ebook"/>ebook</label>
         <label for="software">
-        <input type="checkbox" className="media" id="software" name="software" value="software"/>Software</label>
+        <input type="radio" className="media" id="software" name="single" value="software"/>Software</label>
         <br />
         </div>
         </div>

@@ -51,30 +51,30 @@ return (
         return(
             <>
             
-            <div className="col-lg-3 col-md-4 col-sm-6 mb-3 pt-5"  key={item.trackId}>
+            <div className="col-lg-3 col-md-4 col-sm-6 mb-3 pt-5"  key={item.data.trackId}>
             <div className='favourite-container'>
             <div className="card h-80">
             <div className="card-body">
-            <h4 className='title'>My Favourites:<br/>{item.kind}</h4>
+            <h4 className='title'>My Favourites:<br/>{item.data.kind}</h4>
             </div>
             <div>
-            <img src={item.artworkUrl100} alt="thumbnail" height={"120px"} width={"120px"}/>
+            <img src={item.data.artworkUrl100} alt="thumbnail" height={"120px"} width={"120px"}/>
             </div>
             <ul className="list-group list-group-flush">
                 <li className="list-group-item">
-                <strong>Name:</strong> {item.trackName}
+                <strong>Name:</strong> {(item.data.trackName===undefined)?item.data.collectionName:item.data.trackName}
                 </li>
                 <li className="list-group-item">
-                <strong>Artist:</strong> {item.artistName}
+                <strong>Artist:</strong> {item.data.artistName}
                 </li>
                 <li className="list-group-item">
-                <strong>URL:</strong><a href={(item.collectionViewUrl!==undefined)?item.collectionViewUrl:item.trackViewUrl}>Link to store</a>
+                <strong>URL:</strong><a href={(item.data.collectionViewUrl!==undefined)?item.data.collectionViewUrl:item.trackViewUrl}>Link to store</a>
                 </li>
             </ul>
             
             </div>
             <div>
-            <Button variant='danger' onClick={()=>{DeleteProject(item.trackId)}}>Delete <Icon.Trash/></Button>
+            <Button variant='danger' onClick={()=>{DeleteProject(item.Id)}}>Delete <Icon.Trash/></Button>
         </div>
         </div>
         </div>

@@ -5,28 +5,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import GetFavourites from './Components/GetFavourites';
 import NewSearch from './Components/NewSearch';
 import { Route,Routes,Link } from "react-router-dom";
-/* Marker Please note!!
-as of today 29.05.23 the link in the course material 
-https://performance-partners.apple.com/resources/documentation/itunes-store
-returns a page with no content, if a student hadn't made their app yet 
-there would be no instructions with how to set up search criteria to use the 
-API.
 
-Also not as per email with mentor I have not deployed this app.*/
-
-/* Add a nav bar, that contains links to the pages 
-for search and favourites, look in to how helmut works etc
- */
 function App() {
-  window.addEventListener("beforeunload", async function(event) {
-  event.preventDefault();
-  const response = await fetch('/api/last')
-    if (!response.ok) {
-    throw new Error('Data coud not be removed!')
-    } else {
-    this.alert("data removed");
-    }
-  });
+
   return (
     <>
     <div className="App">
@@ -48,3 +29,19 @@ function App() {
 }
 
 export default App;
+
+
+  /* Task specifies information doesn't need to be stored when user 
+  leaves page, so previously if page is refreshed or
+  the app is closed this code would remove the
+  data in the list. for resubmission I have removed the code below. */
+  /*
+  window.addEventListener("beforeunload", async function(event) {
+  event.preventDefault();
+  const response = await fetch('/api/last')
+    if (!response.ok) {
+    throw new Error('Data coud not be removed!')
+    } else {
+    this.alert("data removed");
+    }
+  });*/

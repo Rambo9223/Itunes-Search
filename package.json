@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "mocha --exit",
+    "test": "mocha",
     "frontend": "cd itunes-list-frontend && npm start",
     "frontbuild": "cd itunes-list-frontend && npm run build",
     "backbuild": "npm run backend",

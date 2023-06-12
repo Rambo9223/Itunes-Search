@@ -65,11 +65,19 @@ function HandleSelect(){
   /* fetchData is async function that 
 send the link to the backend and returns
 the list as json file */
-  
   const fetchData = async(link) => {
-    const response = await fetch(`/search/?${link}`);
-    if (!response.ok) {
-      throw new Error("Data coud not be fetched!");
+    const search = {
+      http:link
+    }
+    const response = await fetch(`/search/`,
+    {method:"POST",
+    headers:{
+      "Content-Type": "application/json",
+    },
+    body:JSON.stringify(search)
+  });
+    if (response.status!==200) {
+      throw new Error (`${response.status}${response.text()}`)
     } else {
       return response.json();
     }
@@ -80,6 +88,7 @@ the list as json file */
 useEffect code runs taking file and making the 
 item variable = the response */
   useEffect(() => {
+    if(path){
     fetchData(path)
       .then((res) => {
         setItem(res.results);
@@ -87,7 +96,7 @@ item variable = the response */
       })
       .catch((e) => {
         console.log(e.message);
-      });
+      });}
   }, [path]);
   let i = 0;
   console.log(item);

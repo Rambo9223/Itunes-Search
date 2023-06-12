@@ -6,7 +6,7 @@ using DELETE method.
 const DeleteProject = async(id) => {
             console.log(id);
             
-            const response = await fetch(`/list/?Id=${id}`,{
+            const response = await fetch(`/list/${id}`,{
             method: "DELETE",
             })
             if (!response.ok) {

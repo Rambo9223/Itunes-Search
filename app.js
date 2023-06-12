@@ -29,22 +29,22 @@ app.get('/api', (req, resp)=>{
 })
 
 /* This is the async function to retrieve the search results from the api, 
-Question? From the previous submission I had a function 
-in the frontend that would fetch data from the api, 
-in the resubmission as requested I have two async functions, one from the frontend to 
-pass the link for the backend function to search the API. Why would this 
-way be the preferred way to structure the code?   */
-app.get("/search/",async function(req, resp){
-    let link = String(JSON.stringify(req.query));
-    let editLink = link.trim().replace(/,/g,'&').replace(/"/g,'').replace(/ /g,"+").replace(/:/g,"=").replace(/{/,'').replace(/}/,'').replace(/=/,":");
+the link is sent via the frontend through the body,
+it is then used in the async function to retrieve the search results */
+app.post("/search/",async function(req, resp){
+    console.log(req.body.http);
+    let link = req.body.http
     
     try {
-        let response = await fetch(editLink);
+        let response = await fetch(link);
         let result = await response.json();
-        resp.status(200).json(result);
+        // on success 
+        resp.status(200).send(result);
+
     }catch(err){
         console.log(err);
-        resp.status(500).json({message:"Internal Server Error."})
+        // on error
+        resp.status(500).send({message:"Internal Server Error."})
     }
     
 })
@@ -98,16 +98,16 @@ app.post('/list/', (req, resp)=>{
 });
 
 // delete person
-app.delete(`/list/`, (req, resp) => {
-    console.log(req.query.Id);
-    let id = Number(req.query.Id);//id of item to delete
+app.delete(`/list/:id`, (req, resp) => {
+    let id = Number(req.params.id);//id of item to delete
     let i = 0;// counting variable = index value of item to delete
     favouritesList.forEach((item)=>{
         //if item id = id
         if(item.Id === id || item.trackId === id){// trackId is only here for testing
             favouritesList.splice(i, 1)
             fs.writeFileSync('./Favourites-List.json', JSON.stringify(favouritesList))
-            resp.send(favouritesList)// log success
+            resp.send({message:"Item Deleted"})// log success
+            
         }else if(i === favouritesList.length-1){
             //else no id's match, log error
             resp.send(JSON.stringify(`Error, cannot find item with id - ${id}`))

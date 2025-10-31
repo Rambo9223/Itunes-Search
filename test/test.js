@@ -26,7 +26,7 @@ describe("test Backend API", () => {
         .end((err, resp) => {
           resp.should.have.status(200);
           resp.body.should.be.a("object");
-          console.log(resp.body.message);
+          //console.log(resp.body.message);
           const message = resp.body.message;
           assert.equal(
             message,
@@ -46,9 +46,11 @@ describe("test Backend API", () => {
           .send(item)
           .end((err, resp) => {
             resp.should.have.status(200);
-            resp.body.should.be.a("array");
-            const trackId = resp.body[0].trackId;
-            assert.equal(trackId, item.trackId, "Items don't match");
+            //console.log(resp.body);
+            resp.body.data.should.be.a("array");
+            const trackId = resp.body.data[0].data.trackId;
+            //console.log(resp.body);
+            assert.equal(trackId, item.data.trackId, "Items don't match");
           });
         // testing post method
         done();
@@ -59,10 +61,11 @@ describe("test Backend API", () => {
       it("test delete route", (done) => {
         chai
           .request(server)
-          .delete(`/list/?Id=${item.trackId}`)
+          .delete(`/list/${item.Id}`)
           .end((err, resp) => {
-            console.log(`${resp.body.length} items in favourites list`);
-            assert.equal(resp.body.length, 0, "Item not removed");
+            //console.log(resp.body.data.length);
+            console.log(`${resp.body.data.length} items in favourites list`);
+            assert.equal(resp.body.data.length, 0, "Item not removed");
           });
         done();
       });

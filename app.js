@@ -11,14 +11,25 @@ const favouritesList = require("./Favourites-List.json"); // import our json fil
 const bodyParser = require('body-parser');//
 app.use(bodyParser.urlencoded({ extended:true }));
 app.use(bodyParser.json());
-app.use(helmet());
+//app.use(helmet());
+app.use(helmet({ crossOriginEmbedderPolicy: false, originAgentCluster: true }));
+app.use(
+  helmet.contentSecurityPolicy({
+    useDefaults: true,
+    directives: {
+      "img-src": ["'self'", "https: data: blob:"],
+    },
+  })
+);
 const fetch = (...args) => import("node-fetch").then(({default:fetch})=>fetch(...args));
 
-app.use(express.static(path.join(__dirname, 'build')));
+// code for build
 
+app.use(express.static(path.join(__dirname, './itunes-list-frontend/build')));
 app.get('/', function (req, res) {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+  res.sendFile(path.join(__dirname, './itunes-list-frontend/build', 'index.html'));
 });
+
 
 app.get('/api/welcome', (req,resp)=>{
     resp.status(200).send({message:"Welcome to the server!"});
@@ -62,55 +73,59 @@ app.get('/api/last', (req, resp)=>{
 
 // creates new list item
 app.post('/list/', (req, resp)=>{
-    const id = Number(req.body.trackId);//changed from collectionID
-
+    const id = req.body.data.trackId ;//changed from collectionID
+    console.log(id);
     let i = 0;// counting variable
     let add = true;// boolean variable changed if user has supplied a
     // duplicate id
     const addItem = req.body;
-    
-    if(favouritesList.length>1){
-    favouritesList.forEach((item)=>{
-        // check if id is the same as any other item
-        if(item.trackId === id){
+    if(favouritesList.length>0){
+
+    for(let i=0;i<favouritesList.length;i++){
+        let item = favouritesList[i];
+        if(item.data.trackId === id){
             console.log("duplicate!");
             // if true log error
-            resp.send(JSON.stringify(`Item with id-${id} already exists`));
+            resp.status(200).send({message:(`${item.data.trackName} by ${item.data.artistName} already exists in the favourites list.`)});
             // add is false to prevent the item being added 
-            add = false; 
-        }else if(add === true && i===favouritesList.length-1){
+            break 
+        }else if(i===favouritesList.length-1){
             console.log("should  be adding");
             // if we have looped through array and there are no duplicate id's
             // add item & log success           
             // object is pushed to the projectList 
             favouritesList.push(addItem)
+            resp.status(200).send({message:`${addItem.data.trackName} by ${addItem.data.artistName} Added to list.`}); 
             // the json file is updated 
-            fs.writeFileSync('./Favourites-List.json', JSON.stringify(favouritesList))
-            resp.send(favouritesList); 
-        }i++;// add 1 to i on each loop
+            fs.writeFileSync('./Favourites-List.json', JSON.stringify(favouritesList));
+            break
+        }
 
-    })}else{// if list has no items this will add first entry
+    }
+    }else{// if list has no items this will add first entry
         favouritesList.push(addItem)
         fs.writeFileSync('./Favourites-List.json', JSON.stringify(favouritesList))
-        resp.status(200).send(favouritesList); 
-        console.log(favouritesList);
+        resp.status(200).send({message:`${addItem.data.trackName} by ${addItem.data.artistName} Added to list.`,data:favouritesList}); 
+        //console.log(favouritesList);
     }
 });
 
 // delete person
 app.delete(`/list/:id`, (req, resp) => {
     let id = Number(req.params.id);//id of item to delete
+    let deleted = false;
+    console.log(id)
     let i = 0;// counting variable = index value of item to delete
     favouritesList.forEach((item)=>{
         //if item id = id
-        if(item.Id === id || item.trackId === id){// trackId is only here for testing
+        if(item.Id === id || item.data.trackId === id){// trackId is only here for testing
             favouritesList.splice(i, 1)
             fs.writeFileSync('./Favourites-List.json', JSON.stringify(favouritesList))
-            resp.send({message:"Item Deleted"})// log success
-            
-        }else if(i === favouritesList.length-1){
+            resp.send({message:"Item Deleted",data:favouritesList})// log success
+            deleted = true ;
+        }else if(i === favouritesList.length-1 && deleted === false){
             //else no id's match, log error
-            resp.send(JSON.stringify(`Error, cannot find item with id - ${id}`))
+            resp.send({message:`Error, cannot find item with id - ${id}`})
         }
         i++; 
     })

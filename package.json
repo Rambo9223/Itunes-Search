@@ -4,10 +4,9 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "mocha",
+    "test": "mocha --exit  && concurrently \"nodemon app.js\" \"cd itunes-list-frontend && npm test\" ",
     "frontend": "cd itunes-list-frontend && npm start",
     "frontbuild": "cd itunes-list-frontend && npm run build",
-    "backbuild": "npm run backend",
     "backend": "npm install && nodemon app.js && concurrently ",
     "start": "concurrently \"npm run backend\" \"npm run frontend\"",
     "build": "concurrently \"npm run frontbuild\" \"npm run backend\""

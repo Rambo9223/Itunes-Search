@@ -20,6 +20,7 @@ function App() {
         </nav>
         
     <Routes>
+        <Route path="/" element={<></>}></Route>
         <Route path="/search" element={<NewSearch/>}></Route>
         <Route path="/favourites" element={<GetFavourites/>}></Route>
       </Routes>

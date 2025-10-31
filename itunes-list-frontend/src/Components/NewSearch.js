@@ -42,7 +42,7 @@ function HandleSearch(){
         }
     }
     // setPath to usestate path 
-    console.log(newPath);
+    //console.log(newPath);
     setPath(newPath);
 }
 // if user has selected select all radio
@@ -99,7 +99,7 @@ item variable = the response */
       });}
   }, [path]);
   let i = 0;
-  console.log(item);
+  //console.log(item);
 
   return (
     <>
@@ -167,6 +167,7 @@ item variable = the response */
             <div
                 className="col-lg-3 col-md-4 col-sm-6 mb-3 pt-5"
                 key={item.collectionId}
+
               >
                 <div className="result-container">
                 <div className="card h-80">
@@ -191,7 +192,9 @@ item variable = the response */
             </ul>
                 </div>
                 <div>
-                    <Button variant="success" onClick={()=>{AddFavourite(item)}}><PlusCircle/> Add to favourites</Button>
+                    <Button variant="success" onClick={()=>{AddFavourite(item).then((res)=>{
+                      alert(res.message);
+                    })}}><PlusCircle/> Add to favourites</Button>
                 </div>
               </div>
               </div>

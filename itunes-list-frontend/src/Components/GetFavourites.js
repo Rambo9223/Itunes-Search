@@ -35,7 +35,7 @@ useEffect(() => {
     .catch((e) => {
         console.log(e.message)
     })
-}, [])
+},)
 
 /* Finally we use the.map method to return each 
 list item in to a bootstrap card on the page
@@ -49,7 +49,7 @@ return (
     <div className="row">
     {item.map((item)=>{
         return(
-            <>
+            
             
             <div className="col-lg-3 col-md-4 col-sm-6 mb-3 pt-5"  key={item.data.trackId}>
             <div className='favourite-container'>
@@ -74,11 +74,13 @@ return (
             
             </div>
             <div>
-            <Button variant='danger' onClick={()=>{DeleteProject(item.Id)}}>Delete <Icon.Trash/></Button>
+            <Button variant='danger' onClick={()=>{DeleteProject(item.Id).then((res)=>{
+                alert(res.message);
+            })}}>Delete <Icon.Trash/></Button>
         </div>
         </div>
         </div>
-        </>)      
+        )      
     })}   
     </div>
 

@@ -25,7 +25,6 @@
         <li><a href="#built-with">Built With</a></li>
       </ul>
     </li>
-    <li><a href="#deployed-version">Deployed Version</a></li>
     <li>
       <a href="#getting-started">Getting Started</a>
       </li>
@@ -46,7 +45,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-Within the GIT repo is a basic app created with create-react-app and express.
+Within the GIT repo is a basic fullstack app created with create-react-app and express.
 This app was created when I had around 4 months of coding expirience. 
 The App allows the user to search the epansive data available in the Apple Itunes API and add any of the items they search to a personal favourites page, they can add as many items as they like and search for as many items as they like, they can also delete any items from their list.
 
@@ -69,15 +68,6 @@ The backend is a custom node/express server.
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-<!-- Deployed Version -->
-
-## Deployed Version 
-
-[![Netlify Status](https://api.netlify.com/api/v1/badges/312c0d7a-b59b-4e9f-b590-0a6ca5eed5b4/deploy-status)](https://app.netlify.com/projects/itunes-api-reactapp/deploys)
-
-If you would like to view the deployment of the app you can find it here - <a href="https://itunes-api-reactapp.netlify.app/">Deployed Version</a>
 
 
 <!-- GETTING STARTED -->
@@ -104,7 +94,7 @@ Open the terminal or VSCode and navigate to the directory that contains the file
     ```
     npm start
     ```
-then enter, the required packages should install and once compiled you will be able to use the app on your browser at localhost:3000
+then enter, the required packages should install and once compiled you will be able to use the app on your browser at localhost:3000. This runs the development version which is perfect if you wish to make any contributions. 
 
 ![Successful Compile](/assets/images/compiled.png)
 
